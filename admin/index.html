@@ -6,10 +6,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Content Management System">
-  <title>Content Manager</title>
+  <meta name="robots" content="noindex">
+  <meta name="cms-preview-style" content="{{ assetPaths['styles.css'] }}">
+  <title>Content Manager | {{ site.title }}</title>
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <!-- Loads Decap CMS; configuration lives in /admin/config.yml -->
   <script async src="{{ assetPaths['admin.js'] }}"></script>
   <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
   <style>

@@ -1,65 +1,301 @@
-## Comment out when doing local development
+# Decap CMS configuration — https://decapcms.org/docs/configuration-options/
+#
+# The admin UI lives at /admin/. Editors sign in with GitHub through cloud.gov Pages,
+# and every save is a commit (or, with the editorial workflow, a pull request) to `repo`.
+
 backend:
   name: github
-  repo: cloud-gov/pages-uswds-11ty
+  repo: dhs-nustl/saver
+  branch: main
   base_url: https://pages.cloud.gov
   auth_endpoint: external/auth/github
   preview_context: pages/build
-  branch: main
   use_graphql: true
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "Upload “{{path}}”"
+    deleteMedia: "Delete “{{path}}”"
 
+# Local editing: run `npm run dev:cms` alongside `npm run dev`, then open
+# http://localhost:8080/admin/. Decap only uses the local backend on localhost,
+# so this is safe to leave on in production.
+local_backend: true
 
-##
-## Uncomment when doing local development on Netlify CMS
-## Run `npx netlify-cms-proxy-server` to start working locally
-## In another terminal, start the app with `npm start`
-## See https://www.netlifycms.org/docs/beta-features/#working-with-a-local-git-repository
-##
-
-# backend:
-#   name: git-gateway
-# local_backend: true
-
-##
-##
-
-media_folder: _img/uploads
-public_folder: uploads
+# Drafts → In review → Ready. Changes go live only when published.
 publish_mode: editorial_workflow
+
+# Uploads are committed to _img/uploads and served from /uploads.
+media_folder: _img/uploads
+public_folder: /uploads
+
 logo_url: https://pages.cloud.gov/images/logos/pages-logo-blue.svg
 
 collections:
-  - label: Posts
+  # ---------------------------------------------------------------- Blog posts
+  - label: Blog posts
+    label_singular: Blog post
     name: posts
+    description: News, announcements and updates. Listed on /blog/.
     folder: posts/
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "posts/{{filename}}/"
+    summary: "{{title}} — {{date}}"
+    sortable_fields: [date, title, author]
+    fields:
+      - {label: Layout, name: layout, widget: hidden, default: layouts/post}
+      - {label: Tags, name: tags, widget: hidden, default: [posts]}
+      - {label: Title, name: title, widget: string}
+      - {label: Author, name: author, widget: string}
+      - label: Publish date
+        name: date
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - {label: Description, name: description, widget: string, required: false, hint: "Short summary used in search results and link previews."}
+      - {label: Excerpt, name: excerpt, widget: text, required: false}
+      - label: Listing image
+        name: image
+        widget: image
+        required: false
+        hint: Shown next to the post on the blog listing.
+        media_folder: /_img/uploads
+        public_folder: uploads
+        choose_url: false
+      - {label: Image alt text, name: image_alt_text, widget: string, required: false, hint: "Describe the image for people using screen readers."}
+      - {label: Body, name: body, widget: markdown}
+
+  # --------------------------------------------------------------------- Pages
+  - label: Pages
+    label_singular: Page
+    name: pages
+    description: Stand-alone pages such as policies and reports. Each page needs a unique URL.
+    folder: pages/
+    create: true
+    slug: "{{slug}}"
+    preview_path: "{{permalink}}"
+    summary: "{{title}} — {{permalink}}"
+    fields:
+      - {label: Title, name: title, widget: string}
+      - label: URL
+        name: permalink
+        widget: string
+        hint: "Where the page lives, e.g. /about-us/ (start and end with a slash)."
+        pattern: ['^(/[a-z0-9\-/]*/|[a-z0-9\-]+\.html)$', "Use lowercase letters, numbers and dashes, starting and ending with /"]
+      - label: Layout
+        name: layout
+        widget: select
+        default: layouts/page
+        options:
+          - {label: "Standard page", value: layouts/page}
+          - {label: "Full width", value: layouts/wide}
+          - {label: "Link list (shows a list from Link lists)", value: layouts/data}
+          - {label: "404 error page", value: layouts/404}
+      - {label: Show side navigation, name: sidenav, widget: boolean, default: false, required: false}
+      - label: Side navigation links
+        name: sidenav_items
+        widget: list
+        required: false
+        summary: "{{fields.name}}"
+        hint: "Usually links to headings on this page, e.g. #privacy-policy"
+        fields:
+          - {label: Name, name: name, widget: string}
+          - {label: URL, name: url, widget: string}
+      - label: Link list to show
+        name: datafile
+        widget: select
+        required: false
+        options: [links]
+        hint: Only used by the "Link list" layout.
+      - {label: Body, name: body, widget: markdown}
+
+  # ----------------------------------------------------------- Home and About
+  - label: Home & About
+    name: special_pages
+    description: The home page sections and the About page.
     editor:
       preview: false
-    fields:
-      - {label: 'Layout', name: 'layout', widget: 'hidden', default: 'layouts/post'}
-      - {label: 'Tags', name: 'tags', widget: 'hidden', default: ['posts']}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Author", name: "author", widget: "string"}
-      - {
-          label: "Publish Date",
-          name: "date",
-          widget: "datetime",
-          format: 'YYYY-MM-DD',
-          dateFormat: 'YYYY-MM-DD',
-          timeFormat: false
-        }
-      - {
-        label: "Image",
-        name: "image",
-        widget: "image",
-        allow_multiple: false,
-        required: false
-        }
-      - {
-        label: "Image Alt Text",
-        name: "image_alt_text",
-        widget: "string",
-        required: false
-        }
-      - {label: "Body", name: "body", widget: "markdown"}
+    files:
+      - label: Home page
+        name: home
+        file: _data/home.yaml
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - {label: Small heading, name: eyebrow, widget: string, required: false}
+              - {label: Heading, name: heading, widget: string}
+              - {label: Text, name: text, widget: text, required: false}
+              - {label: Button text, name: button_text, widget: string, required: false}
+              - {label: Button link, name: button_url, widget: string, required: false}
+              - label: Background image
+                name: image
+                widget: image
+                required: false
+                hint: Leave empty to use the default hero image.
+                media_folder: /_img/uploads
+                public_folder: uploads
+                choose_url: false
+          - label: Tagline
+            name: tagline
+            widget: object
+            fields:
+              - {label: Heading, name: heading, widget: string}
+              - {label: Body, name: body, widget: markdown, buttons: [bold, italic, link, bulleted-list, numbered-list], editor_components: []}
+          - label: Highlights
+            name: highlights
+            widget: list
+            summary: "{{fields.heading}}"
+            hint: Shown in two columns. Two, four or six work best.
+            fields:
+              - {label: Heading, name: heading, widget: string}
+              - {label: Text, name: text, widget: text}
+              - {label: Icon image, name: image, widget: image, required: false, media_folder: /_img/uploads, public_folder: uploads, choose_url: false}
+              - {label: Icon alt text, name: image_alt_text, widget: string, required: false}
+      - label: About page
+        name: about
+        file: about/index.md
+        fields:
+          - {label: Layout, name: layout, widget: hidden, default: layouts/page}
+          - {label: Title, name: title, widget: string}
+          - label: Navigation
+            name: eleventyNavigation
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Key, name: key, widget: string}
+              - {label: Order, name: order, widget: number, value_type: int}
+          - {label: Body, name: body, widget: markdown}
+
+  # ------------------------------------------------------------ Staff directory
+  - label: Staff directory
+    name: staff
+    description: People listed on /staff-directory/, /departments/ and /members/.
+    editor:
+      preview: false
+    files:
+      - label: Staff members
+        name: staff
+        file: _data/staff.yaml
+        fields:
+          - label: Members
+            name: members
+            widget: list
+            label_singular: member
+            summary: "{{fields.last_name}}, {{fields.first_name}} — {{fields.department}}"
+            collapsed: true
+            fields:
+              - {label: First name, name: first_name, widget: string}
+              - {label: Last name, name: last_name, widget: string}
+              - label: ID
+                name: id
+                widget: string
+                hint: "Unique; used in the page URL /members/<id>/. Lowercase letters and numbers only."
+                pattern: ['^[a-z0-9]+$', "Lowercase letters and numbers only"]
+              - {label: Job title, name: job_title, widget: string}
+              - {label: Department, name: department, widget: string, hint: "Members with the same department are grouped together."}
+              - {label: Email, name: email, widget: string, required: false}
+              - {label: Phone, name: phone, widget: string, required: false}
+              - {label: Location, name: location, widget: string, required: false}
+
+  # ----------------------------------------------------------------- Link lists
+  - label: Link lists
+    name: lists
+    description: Lists of links shown by pages that use the "Link list" layout.
+    editor:
+      preview: false
+    files:
+      - label: Links
+        name: links
+        file: _data/lists/links.yaml
+        fields:
+          - label: Links
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: URL, name: url, widget: string}
+              - {label: Description, name: description, widget: text, required: false}
+
+  # -------------------------------------------------------------- Site settings
+  - label: Site settings
+    name: settings
+    editor:
+      preview: false
+    files:
+      - label: General, navigation & integrations
+        name: site
+        file: _data/site.yaml
+        fields:
+          - {label: Site title, name: title, widget: string}
+          - {label: Contact email, name: email, widget: string}
+          - {label: Site description, name: description, widget: text}
+          - {label: Production URL, name: url, widget: string, hint: "Used to build absolute links, e.g. in the sitemap."}
+
+          - label: Primary navigation
+            name: primary_navigation
+            widget: list
+            summary: "{{fields.name}}"
+            hint: Top-level menu. Give an item a URL, or sub-links to make it a dropdown.
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: URL, name: url, widget: string, required: false}
+              - label: Dropdown links
+                name: children
+                widget: list
+                required: false
+                summary: "{{fields.name}}"
+                fields:
+                  - {label: Name, name: name, widget: string}
+                  - {label: URL, name: url, widget: string}
+              - label: Build dropdown from
+                name: children_collection
+                widget: select
+                required: false
+                options: [{label: "Staff departments", value: staffByDept}]
+                hint: Fills the dropdown automatically instead of using the links above.
+          - label: Secondary navigation
+            name: secondary_navigation
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: URL, name: url, widget: string}
+          - label: Footer links
+            name: footer_navigation
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - {label: Name, name: name, widget: string}
+              - {label: URL, name: url, widget: string}
+
+          - label: Digital Analytics Program (DAP)
+            name: dap
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - {label: Agency code, name: agency, widget: string, required: false, hint: "e.g. DHS"}
+              - {label: Sub-agency, name: subagency, widget: string, required: false}
+          - label: Google Analytics
+            name: ga
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - {label: Measurement ID, name: ua, widget: string, required: false}
+          - label: Search.gov
+            name: searchgov
+            widget: object
+            collapsed: true
+            fields:
+              - {label: Endpoint, name: endpoint, widget: string, default: "https://search.usa.gov"}
+              - {label: Affiliate, name: affiliate, widget: string}
+              - {label: Access key, name: access_key, widget: string}
+              - {label: Show results on this site, name: inline, widget: boolean, default: true}
+              - {label: Type-ahead suggestions, name: suggestions, widget: boolean, default: true}

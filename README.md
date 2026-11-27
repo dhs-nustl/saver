@@ -89,43 +89,51 @@ TODO
 
 TODO
 
-## Netlify CMS
+## Content management (Decap CMS)
 
+Site admins can edit content without touching code at **`/admin/`**, powered by
+[Decap CMS](https://decapcms.org/). Every save becomes a Git commit; with the editorial
+workflow enabled, changes go through *Draft → In review → Ready* as pull requests and only
+go live when published.
 
+| CMS section | What it edits | File(s) |
+| --- | --- | --- |
+| Blog posts | Posts listed on `/blog/` | `posts/*.md` |
+| Pages | Stand-alone pages (policies, reports, …), URL, layout, side navigation | `pages/*.md` |
+| Home & About | Home page hero, tagline and highlights; the About page | `_data/home.yaml`, `about/index.md` |
+| Staff directory | People shown on `/staff-directory/`, `/departments/`, `/members/` | `_data/staff.yaml` |
+| Link lists | Lists shown by pages using the "Link list" layout | `_data/lists/*.yaml` |
+| Site settings | Title, contact, primary/secondary/footer navigation, DAP, GA, Search.gov | `_data/site.yaml` |
+
+Images uploaded in the CMS are stored in `_img/uploads/` and served from `/uploads/`.
 
 ### Config
 
-The Netlify CMS can be configured in [`/admin/config.yml`](./admin/config.yml) and you will update the
-`repo` key to be your Github organization and repository name.
+The CMS is configured in [`/admin/config.yml`](./admin/config.yml). Set `backend.repo` to your
+GitHub organization and repository. Editors sign in with GitHub through cloud.gov Pages and need
+write access to the repository.
 
 ```yml
 backend:
   name: github
   repo: <your-github-org>/<your-repository-name>
-  base_url: https://federalistapp.18f.gov
+  branch: main
+  base_url: https://pages.cloud.gov
   auth_endpoint: external/auth/github
-  preview_context: federalist/build
-  branch: master
-  use_graphql: true
 ```
 
-### Running Locally
+To add something new to the CMS, add a collection (a folder of Markdown files) or a file entry
+(a YAML data file) to `collections` in that file. Data files edited by the CMS must have an object
+at the top level (e.g. `members:`), not a bare list.
 
-You can run the Netlify CMS locally to more easily customize and troubleshoot the CMS to you content.
-We provide comments in the [`/admin/config.yml`](./admin/config.yml) instructing you how to change the `backend` values from your production site to the local development.
+### Running locally
 
-> *Note: Make sure to not commit and push the config with the `backend` set for local develop to Github or
-else you will break your production site's Netlify CMS.
+`local_backend: true` is set in the config. Decap only uses it when the admin is opened on
+`localhost`, so there is nothing to toggle before deploying.
 
-```yml
-# Local development backend
-backend:
-  name: git-gateway
-local_backend: true
-```
-
-Once you [`/admin/config.yml`](./admin/config.yml) is set to local development, you run `npm run dev:cms` to
-serve as a development authentication server.
+1. `npm run dev` to build and serve the site.
+2. In another terminal, `npm run dev:cms` to start the local Decap proxy server.
+3. Open http://localhost:8080/admin/. Edits are written straight to your working copy (no commits).
 
 ## How To
 

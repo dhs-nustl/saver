@@ -72,8 +72,8 @@ primary_navigation:
       - name: Navigation link
         url: "#main-content"
   - name: Departments
-    children:
-      use_collection: "staffByDept"
+    # Builds the submenu from the staff directory's departments instead of a fixed list
+    children_collection: staffByDept
 
 
 secondary_navigation:

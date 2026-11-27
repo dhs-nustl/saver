@@ -18,6 +18,9 @@ module.exports = function (config) {
   // Copy the `admin` folders to the output
   config.addPassthroughCopy("admin");
 
+  // Files uploaded through the CMS land in _img/uploads and are served at /uploads
+  config.addPassthroughCopy({ "_img/uploads": "uploads" });
+
   // Add plugins
   config.addPlugin(pluginRss);
   config.addPlugin(pluginNavigation);
@@ -51,18 +54,9 @@ module.exports = function (config) {
     const records = parse(contents, csvConfig);
     return records;
   });
-  
-config.addDataExtension("csv", (contents) =>
-    parse(contents, {
-      columns: true,
-      skip_empty_lines: true,
-      relax_column_count: true,
-      trim: true,
-    })
-  );
 
   config.addCollection("staffByDept", (collection) => {
-    const staff = collection.getAll()[0].data.staff;
+    const staff = collection.getAll()[0].data.staff.members || [];
     const grouped = {};
 
     for (const member of staff) {
@@ -131,6 +125,9 @@ config.addDataExtension("csv", (contents) =>
     linkify: true,
   }).use(markdownItNamedHeadings)
   config.setLibrary("md", markdownLibrary);
+
+  // Render a Markdown string from data files (e.g. CMS-edited fields in _data/home.yaml)
+  config.addFilter("markdown", (content) => markdownLibrary.render(content || ""));
 
   // Override Browsersync defaults (used only with --serve)
   config.setBrowserSyncConfig({

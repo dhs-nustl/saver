@@ -1,6 +1,6 @@
 {% comment %} To modify the menu system, you are welcome to edit this HTML
-directly or you can look inside _config.yml where we provide an easy way to
-manage your navigation system {% endcomment %}
+directly, or manage the navigation in the CMS under "Site settings" > "Navigation"
+(stored in _data/site.yaml) {% endcomment %}
 
 <header class="usa-header usa-header--extended" role="banner">
   <div class="usa-navbar">
@@ -19,7 +19,7 @@ manage your navigation system {% endcomment %}
       </button>
       <ul class="usa-nav__primary usa-accordion">
         {% for nav_item in primary_navigation %}
-          {% unless nav_item.children %}
+          {% unless nav_item.children or nav_item.children_collection %}
         {% assign basedir = page.url | remove_first: '/' | split: '/' | first |
         lstrip %} {% assign linkdir = nav_item.url | replace: "/", "" | lstrip
         %}
@@ -40,7 +40,7 @@ manage your navigation system {% endcomment %}
             <span>{{ nav_item.name | escape }}</span>
           </button>
           <ul id="{{ nav_id }}" class="usa-nav__submenu">
-            {% unless nav_item.children.use_collection %}
+            {% unless nav_item.children_collection %}
               {% for subnav_item in nav_item.children %}
               <li class="usa-nav__submenu-item">
                 <a href="{{ subnav_item.url  }}"
@@ -49,7 +49,7 @@ manage your navigation system {% endcomment %}
               </li>
               {% endfor %}
             {% else %}
-              {% assign subnav_collection = collections[nav_item.children.use_collection] %}
+              {% assign subnav_collection = collections[nav_item.children_collection] %}
               {% for subnav_item in subnav_collection %}
                 <li class="usa-nav__submenu-item">
                   <a href="/departments/{{ subnav_item.name | slug }}/index.html"

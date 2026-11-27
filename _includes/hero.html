@@ -1,14 +1,20 @@
 {% comment %}
-This will be displayed on the homepage. Ideally, you want to highlight key goals of the website
+This will be displayed on the homepage. Ideally, you want to highlight key goals of the website.
+The content comes from _data/home.yaml and can be edited in the CMS under "Home page".
 {% endcomment %}
 
-<section class="usa-hero">
+{% assign hero = home.hero %}
+<section class="usa-hero"{% if hero.image != blank %} style="background-image: url('{{ '/' | append: hero.image | url }}') !important"{% endif %}>
   <div class="grid-container">
     <div class="usa-hero__callout">
-      <h1 class="usa-hero__heading"><span class="usa-hero__heading--alt">Hero callout:</span>Bring attention to a project priority
+      <h1 class="usa-hero__heading">
+        {%- if hero.eyebrow != blank %}<span class="usa-hero__heading--alt">{{ hero.eyebrow | escape }}</span>{% endif -%}
+        {{ hero.heading | escape }}
       </h1>
-      <p>Support the callout with some short explanatory text. You don’t need more than a couple of sentences.</p>
-      <a class="usa-button" href="javascript:void(0)">Call to action</a>
+      {% if hero.text != blank %}<p>{{ hero.text | escape }}</p>{% endif %}
+      {% if hero.button_text != blank %}
+      <a class="usa-button" href="{{ hero.button_url | default: '#main-content' }}">{{ hero.button_text | escape }}</a>
+      {% endif %}
     </div>
   </div>
 </section>

@@ -1,0 +1,315 @@
+# Staff directory. Edit in the CMS under "Staff directory", or by hand.
+# Each member gets a page at /members/<id>/ and is grouped by department.
+members:
+  - last_name: Chen
+    first_name: Michael
+    id: i9j0k1l2
+    job_title: Chief Technology Officer
+    department: Information Technology
+    email: michael.chen@agency.gov
+    phone: 202-555-3456 x7890
+    location: Tech Center - 4th Floor
+  - last_name: Garcia
+    first_name: Robert
+    id: y5z6a7b8
+    job_title: HR Director
+    department: Human Resources
+    email: robert.garcia@agency.gov
+    phone: 202-555-7890 x2345
+    location: HR Complex - 2nd Floor
+  - last_name: Johnson
+    first_name: Sarah
+    id: m3n4o5p6
+    job_title: Lead Counsel
+    department: Legal Services
+    email: sarah.johnson@agency.gov
+    phone: 202-555-4567 x8901
+    location: Legal Building - 1st Floor
+  - last_name: Kim
+    first_name: Lisa
+    id: u1v2w3x4
+    job_title: Communications Manager
+    department: Communications
+    email: lisa.kim@agency.gov
+    phone: 202-555-6789 x0123
+    location: Media Center - Ground Floor
+  - last_name: Lee
+    first_name: Amanda
+    id: c9d0e1f2
+    job_title: Senior HR Specialist
+    department: Human Resources
+    email: amanda.lee@agency.gov
+    phone: 202-555-8901 x3456
+    location: HR Complex - 2nd Floor
+  - last_name: Rodriguez
+    first_name: Emily
+    id: e5f6g7h8
+    job_title: Senior Policy Analyst
+    department: Policy
+    email: emily.rodriguez@agency.gov
+    phone: 202-555-2345 x6789
+    location: West Wing - 2nd Floor
+  - last_name: Smith
+    first_name: John
+    id: a1b2c3d4
+    job_title: Director of Operations
+    department: Administration
+    email: john.smith@agency.gov
+    phone: 202-555-1234 x5678
+    location: Main HQ - 3rd Floor
+  - last_name: Williams
+    first_name: David
+    id: q7r8s9t0
+    job_title: Budget Director
+    department: Budget and Planning
+    email: david.williams@agency.gov
+    phone: 202-555-5678 x9012
+    location: Finance Wing - 5th Floor
+  - last_name: Aaronson
+    first_name: Rachel
+    id: z1y2x3w4
+    job_title: Senior Compliance Officer
+    department: Legal Services
+    email: rachel.aaronson@agency.gov
+    phone: 202-555-9012 x4567
+    location: Legal Building - 3rd Floor
+  - last_name: Adams
+    first_name: Marcus
+    id: b5c6d7e8
+    job_title: IT Security Specialist
+    department: Information Technology
+    email: marcus.adams@agency.gov
+    phone: 202-555-1123 x5678
+    location: Tech Center - 2nd Floor
+  - last_name: Alvarez
+    first_name: Sofia
+    id: f9g0h1j2
+    job_title: Budget Analyst
+    department: Budget and Planning
+    email: sofia.alvarez@agency.gov
+    phone: 202-555-2234 x6789
+    location: Finance Wing - 4th Floor
+  - last_name: Baker
+    first_name: Christopher
+    id: k3l4m5n6
+    job_title: Communications Coordinator
+    department: Communications
+    email: christopher.baker@agency.gov
+    phone: 202-555-3345 x7890
+    location: Media Center - 1st Floor
+  - last_name: Benson
+    first_name: Karen
+    id: p7q8r9s0
+    job_title: Human Resources Manager
+    department: Human Resources
+    email: karen.benson@agency.gov
+    phone: 202-555-4456 x8901
+    location: HR Complex - 3rd Floor
+  - last_name: Brown
+    first_name: James
+    id: t1u2v3w4
+    job_title: Policy Research Lead
+    department: Policy
+    email: james.brown@agency.gov
+    phone: 202-555-5567 x9012
+    location: West Wing - 4th Floor
+  - last_name: Carter
+    first_name: Elena
+    id: x5y6z7a8
+    job_title: Senior Procurement Specialist
+    department: Administration
+    email: elena.carter@agency.gov
+    phone: 202-555-6678 x0123
+    location: Main HQ - 2nd Floor
+  - last_name: Chen
+    first_name: Olivia
+    id: b9c0d1e2
+    job_title: Data Analytics Manager
+    department: Information Technology
+    email: olivia.chen@agency.gov
+    phone: 202-555-7789 x1234
+    location: Tech Center - 5th Floor
+  - last_name: Davis
+    first_name: Jamal
+    id: f3g4h5j6
+    job_title: Communications Director
+    department: Communications
+    email: jamal.davis@agency.gov
+    phone: 202-555-8890 x2345
+    location: Media Center - Ground Floor
+  - last_name: Edwards
+    first_name: Maria
+    id: k7l8m9n0
+    job_title: Senior Legal Counsel
+    department: Legal Services
+    email: maria.edwards@agency.gov
+    phone: 202-555-9901 x3456
+    location: Legal Building - 2nd Floor
+  - last_name: Foster
+    first_name: Daniel
+    id: p1q2r3s4
+    job_title: Budget Director Deputy
+    department: Budget and Planning
+    email: daniel.foster@agency.gov
+    phone: 202-555-0012 x4567
+    location: Finance Wing - 3rd Floor
+  - last_name: Garcia
+    first_name: Isabella
+    id: t5u6v7w8
+    job_title: HR Training Specialist
+    department: Human Resources
+    email: isabella.garcia@agency.gov
+    phone: 202-555-1123 x5678
+    location: HR Complex - 1st Floor
+  - last_name: Green
+    first_name: Ryan
+    id: x9y0z1a2
+    job_title: Policy Implementation Analyst
+    department: Policy
+    email: ryan.green@agency.gov
+    phone: 202-555-2234 x6789
+    location: West Wing - 3rd Floor
+  - last_name: Harris
+    first_name: Aisha
+    id: b3c4d5e6
+    job_title: IT Infrastructure Manager
+    department: Information Technology
+    email: aisha.harris@agency.gov
+    phone: 202-555-3345 x7890
+    location: Tech Center - 1st Floor
+  - last_name: Jackson
+    first_name: Nathan
+    id: f7g8h9j0
+    job_title: Senior Administrative Officer
+    department: Administration
+    email: nathan.jackson@agency.gov
+    phone: 202-555-4456 x8901
+    location: Main HQ - 4th Floor
+  - last_name: Kim
+    first_name: David
+    id: k1l2m3n4
+    job_title: Communications Strategy Lead
+    department: Communications
+    email: david.kim@agency.gov
+    phone: 202-555-5567 x9012
+    location: Media Center - 2nd Floor
+  - last_name: Lee
+    first_name: Jessica
+    id: p5q6r7s8
+    job_title: Legal Policy Advisor
+    department: Legal Services
+    email: jessica.lee@agency.gov
+    phone: 202-555-6678 x0123
+    location: Legal Building - 4th Floor
+  - last_name: Martinez
+    first_name: Carlos
+    id: t9u0v1w2
+    job_title: Budget Compliance Specialist
+    department: Budget and Planning
+    email: carlos.martinez@agency.gov
+    phone: 202-555-7789 x1234
+    location: Finance Wing - 2nd Floor
+  - last_name: Nguyen
+    first_name: Trang
+    id: x3y4z5a6
+    job_title: HR Diversity Coordinator
+    department: Human Resources
+    email: trang.nguyen@agency.gov
+    phone: 202-555-8890 x2345
+    location: HR Complex - 4th Floor
+  - last_name: Patel
+    first_name: Raj
+    id: b7c8d9e0
+    job_title: IT Systems Architect
+    department: Information Technology
+    email: raj.patel@agency.gov
+    phone: 202-555-9901 x3456
+    location: Tech Center - 3rd Floor
+  - last_name: Rodriguez
+    first_name: Elena
+    id: f1g2h3j4
+    job_title: Senior Policy Strategist
+    department: Policy
+    email: elena.rodriguez@agency.gov
+    phone: 202-555-0012 x4567
+    location: West Wing - 1st Floor
+  - last_name: Sanchez
+    first_name: Miguel
+    id: k5l6m7n8
+    job_title: Administrative Operations Manager
+    department: Administration
+    email: miguel.sanchez@agency.gov
+    phone: 202-555-1123 x5678
+    location: Main HQ - 1st Floor
+  - last_name: Singh
+    first_name: Priya
+    id: p9q0r1s2
+    job_title: Legal Research Analyst
+    department: Legal Services
+    email: priya.singh@agency.gov
+    phone: 202-555-2234 x6789
+    location: Legal Building - 1st Floor
+  - last_name: Taylor
+    first_name: Christopher
+    id: t3u4v5w6
+    job_title: Budget Planning Coordinator
+    department: Budget and Planning
+    email: christopher.taylor@agency.gov
+    phone: 202-555-3345 x7890
+    location: Finance Wing - 1st Floor
+  - last_name: Torres
+    first_name: Angela
+    id: x7y8z9a0
+    job_title: Communications Media Specialist
+    department: Communications
+    email: angela.torres@agency.gov
+    phone: 202-555-4456 x8901
+    location: Media Center - 3rd Floor
+  - last_name: Walker
+    first_name: Marcus
+    id: b1c2d3e4
+    job_title: IT Security Analyst
+    department: Information Technology
+    email: marcus.walker@agency.gov
+    phone: 202-555-5567 x9012
+    location: Tech Center - 4th Floor
+  - last_name: Washington
+    first_name: Terri
+    id: f5g6h7j8
+    job_title: HR Recruitment Specialist
+    department: Human Resources
+    email: terri.washington@agency.gov
+    phone: 202-555-6678 x0123
+    location: HR Complex - 2nd Floor
+  - last_name: Williams
+    first_name: Nicole
+    id: k9l0m1n2
+    job_title: Policy Research Analyst
+    department: Policy
+    email: nicole.williams@agency.gov
+    phone: 202-555-7789 x1234
+    location: West Wing - 5th Floor
+  - last_name: Wilson
+    first_name: Eric
+    id: p3q4r5s6
+    job_title: Senior Administrative Coordinator
+    department: Administration
+    email: eric.wilson@agency.gov
+    phone: 202-555-8890 x2345
+    location: Main HQ - 5th Floor
+  - last_name: Xu
+    first_name: Jennifer
+    id: t7u8v9w0
+    job_title: Legal Compliance Manager
+    department: Legal Services
+    email: jennifer.xu@agency.gov
+    phone: 202-555-9901 x3456
+    location: Legal Building - 5th Floor
+  - last_name: Zhang
+    first_name: Alex
+    id: x1y2z3a4
+    job_title: IT Project Manager
+    department: Information Technology
+    email: alex.zhang@agency.gov
+    phone: 202-555-0012 x4567
+    location: Tech Center - Ground Floor

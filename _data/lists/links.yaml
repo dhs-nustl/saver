@@ -1,0 +1,14 @@
+# A list of links shown on any page that uses the "Data list" layout with datafile: links
+items:
+  - name: GSA
+    url: https://gsa.gov
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus interdum pellentesque. Integer eu vehicula elit. Sed cursus magna in dui suscipit rhoncus.
+  - name: USDA
+    url: http://usda.gov/
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus interdum pellentesque. Integer eu vehicula elit. Sed cursus magna in dui suscipit rhoncus.
+  - name: Performance.gov
+    url: http://performance.gov/
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus interdum pellentesque. Integer eu vehicula elit. Sed cursus magna in dui suscipit rhoncus.
+  - name: Login.gov
+    url: https://login.gov
+    description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus interdum pellentesque. Integer eu vehicula elit. Sed cursus magna in dui suscipit rhoncus.

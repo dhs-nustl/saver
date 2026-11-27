@@ -3,7 +3,8 @@ layout: layouts/default
 ---
 
 {% comment %}
-This is an example showing how you can load date from the _data/ folder
+Renders the list in _data/lists/<datafile>.yaml, where `datafile` is set in the page front matter.
+These lists can be edited in the CMS under "Link lists".
 {% endcomment %}
 
 
@@ -11,12 +12,12 @@ This is an example showing how you can load date from the _data/ folder
   <div class="grid-container">
     <div class="grid-row grid-gap">
       <div class="usa-layout-docs__main desktop:grid-col-9 usa-prose">
-        <h1 class="title">{{page.title}}</h1>
+        <h1 class="title">{{ title }}</h1>
         {{ content }}
         <ul>
-          {% for item in site.data[page.datafile] %}
+          {% for item in lists[datafile].items %}
           <li>
-            <a href="{{ item.url }}"><b>{{ item.name }}</b></a>: {{item.description}}
+            <a href="{{ item.url }}"><b>{{ item.name | escape }}</b></a>: {{ item.description | escape }}
           </li>
           {% endfor %}
         </ul>
